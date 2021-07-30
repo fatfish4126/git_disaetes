@@ -9,35 +9,22 @@ def index():
 @app.route('/aml', methods=['GET','POST'])
     def aml():
         request.values['p1']
-        
-        import urllib.request
-        import json
-        import os
-        import ssl
-
-        def allowSelfSignedHttps(allowed):
-        # bypass the server certificate verification on client side
-        if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
-            ssl._create_default_https_context = ssl._create_unverified_context
-
-         allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
-
-            # Request data goes here
-            data = {
-            "Inputs": {
-            "WebServiceInput0":
-            [
-                {
-                    'Pregnancies': "6",
-                    'Glucose': "148",
-                    'BloodPressure': "72",
-                    'SkinThickness': "35",
-                    'Insulin': "0",
-                    'BMI': "33.6",
-                    'DiabetesPedigreeFunction': "0.627",
-                    'Age': "50",
-                    'Outcome': "1",
-                },
+    
+        data = {
+        "Inputs": {
+        "WebServiceInput0":
+        [
+            {
+                'Pregnancies': "6",
+                'Glucose': "148",
+                'BloodPressure': "72",
+                'SkinThickness': "35",
+                'Insulin': "0",
+                'BMI': "33.6",
+                'DiabetesPedigreeFunction': "0.627",
+                'Age': "50",
+                'Outcome': "1",
+            },
             ],
         },
         "GlobalParameters": {
