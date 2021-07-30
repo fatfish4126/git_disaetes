@@ -42,33 +42,33 @@ def index():
         },
         "GlobalParameters": {
         }
-    }
+        }
 
-    body = str.encode(json.dumps(data))
+        body = str.encode(json.dumps(data))
 
-    url = 'http://eb89f27c-7858-42a3-9302-6b91a14d2232.eastasia.azurecontainer.io/score'
-    api_key = 'IrIkhtbwxAes12yqDvRHKMsSkfzPidy3' # Replace this with the API key for the web service
-    headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+        url = 'http://eb89f27c-7858-42a3-9302-6b91a14d2232.eastasia.azurecontainer.io/score'
+        api_key = 'IrIkhtbwxAes12yqDvRHKMsSkfzPidy3' # Replace this with the API key for the web service
+        headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
-    req = urllib.request.Request(url, body, headers)
+        req = urllib.request.Request(url, body, headers)
 
-    htmlstr="<html><body>"
+        htmlstr="<html><body>"
 
-    try:
+        try:
         response = urllib.request.urlopen(req)
 
-        result = response.read()
-        htmlstr=htmlstr+"依據您輸入的參數，經過分析模型比對，罹患糖尿病的風險為"
-        htmlstr=htmlstr['Resutlts']['WebServiceOutput0'][0]['Scored Probabilities']
-        print(result)
-    except urllib.error.HTTPError as error:
-        print("The request failed with status code: " + str(error.code))
+            result = response.read()
+            htmlstr=htmlstr+"依據您輸入的參數，經過分析模型比對，罹患糖尿病的風險為"
+            htmlstr=htmlstr['Results']['WebServiceOutput0'][0]['Scored Probabilities']
+            print(result)
+        except urllib.error.HTTPError as error:
+            print("The request failed with status code: " + str(error.code))
 
-        # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
-        print(error.info())
-        print(json.loads(error.read().decode("utf8", 'ignore')))
+            # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+            print(error.info())
+            print(json.loads(error.read().decode("utf8", 'ignore')))
 
-        htmlstr=htmlstr+"</body></html>"
+            htmlstr=htmlstr+"</body></html>"
     return htmlstr
 
 
