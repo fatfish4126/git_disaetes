@@ -11,20 +11,20 @@ def index():
         request.values['p1']
         
         import urllib.request
-    import json
-    import os
-    import ssl
+        import json
+        import os
+        import ssl
 
-    def allowSelfSignedHttps(allowed):
+        def allowSelfSignedHttps(allowed):
         # bypass the server certificate verification on client side
         if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
             ssl._create_default_https_context = ssl._create_unverified_context
 
-    allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
+         allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
 
-    # Request data goes here
-    data = {
-        "Inputs": {
+            # Request data goes here
+            data = {
+            "Inputs": {
             "WebServiceInput0":
             [
                 {
